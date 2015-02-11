@@ -1,13 +1,6 @@
  $(document).ready(function(){
 
-  
-  var user = {
-    name: "moops"
-    tweets: [];
-  };
-
-
-
+  var visitor = "anuj";
 
 
   var since = function(date){
@@ -41,35 +34,44 @@
     return Math.floor(seconds) + " seconds ago";
   }
 
-var index = streams.home.length - 1;
-while(index >= 0){
-  var tweet = streams.home[index];
-  var timeSince = since(tweet.created_at)
-  $(".tweets").append('<p class="tweet-body">'+
-    '<span class="at">'+'@'+'</span>' + 
-    '<span class="user-name">'+ tweet.user + 
-    '</span>' +
-    ': ' + 
-    '<span class="message">' + tweet.message + '</span>'+
-    '<span class="time">' + " " +timeSince + '</span>' +
-    '</p>');
-  index -= 1;
-}
+  var index = streams.home.length - 1;
+  while(index >= 0){
+    var tweet = streams.home[index];
+    var timeSince = since(tweet.created_at)
+    $(".tweets").append('<p class="tweet-body">'+
+      '<span class="at">'+'@'+'</span>' + 
+      '<span class="user-name">'+ tweet.user + 
+      '</span>' +
+      ': ' + 
+      '<span class="message">' + tweet.message + '</span>'+
+      '<span class="time">' + " " +timeSince + '</span>' +
+      '</p>');
+    index -= 1;
+    scheduleNextTweet();
+  }
 
-$("#userInput").submit(funciton(event){
-  var submitted = $("input.userIn");
-  user.tweets.push(submitted);
-  var timeSince = since(tweet.created_at)
+  $("form#userInput").submit(function(event){
+    var submitted = $("input.userIn").val();
+    console.log(submitted);
+    writeTweet(submitted);
 
-  $(".tweets").append('<p class="tweet-body">'+
-    '<span class="at">'+'@'+'</span>' + 
-    '<span class="user-name">'+ user.name + 
-    '</span>' +
-    ': ' + 
-    '<span class="message">' + user.tweet + '</span>'+
-    '<span class="time">' + " " +timeSince + '</span>' +
-    '</p>');)
 
-})
+    var tweet = streams.home[index];
+    
+   
+    $(".tweets").prepend('<p class="tweet-body">'+
+      '<span class="at">'+'@'+'</span>' + 
+      '<span class="user-name">'+ tweet.user + 
+      '</span>' +
+      ': ' + 
+      '<span class="message">' + tweet.message + '</span>'+
+      '<span class="time">' + " " +timeSince + '</span>' +
+      '</p>');
+
+    $("input.userIn").text("");
+
+
+    event.preventDefault();
+  })
 
 });
