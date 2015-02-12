@@ -1,7 +1,7 @@
  var visitor = "anuj";
  $(document).ready(function(){
 
-  
+
   streams.users[visitor] = [];
 
 
@@ -49,7 +49,7 @@
       '<span class="time">' + "  " +timeSince + '</span>' +
       '</p>');
     index -= 1;
-   
+
   };
 
   $("form#visitor").submit(function(event){
@@ -62,7 +62,7 @@
     var tweet = streams.home[index];
     tweet.created_at = new Date();
     var timeSince = since(tweet.created_at);
-   
+
     $(".tweets").prepend('<p class="tweet-body">' +
       '<span class="at">' + '@' + '</span>' + 
       '<span class="user-name">'+ tweet.user + 
@@ -75,12 +75,22 @@
     $("input.visitorTweet").text("");
 
 
-   event.preventDefault();
+    event.preventDefault();
   });
 
-  $(".user-name").last().click(function(){
-
-
+  $(".user-name").click(function(){
+    var userClicked = $(this).text();
+   $(".tweets").text("");
+    streams.users[userClicked].forEach(function(tweet){
+      $(".tweets").prepend('<p class="tweet-body">' +
+        '<span class="at">' + '@' + '</span>' + 
+        '<span class="user-name">'+ tweet.user + 
+        '</span>' +
+        ': ' + 
+        '<span class="message">' + tweet.message + '</span>' +
+        '<span class="time">' + "  " +timeSince + '</span>' +
+        '</p>')
+    })
   })
 
 });
