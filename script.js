@@ -1,7 +1,8 @@
+ var visitor = "anuj";
  $(document).ready(function(){
 
-  var visitorN = "anuj";
-  streams.users[visitorN] = [];
+  
+  streams.users[visitor] = [];
 
 
   var since = function(date){
@@ -54,11 +55,12 @@
   $("form#visitor").submit(function(event){
     var submitted = $("input.visitorTweet").val();
     
-    writeTweet(visitorN, submitted);
+    writeTweet(submitted);
 
 
     var index = streams.home.length - 1;
     var tweet = streams.home[index];
+    tweet.created_at = new Date();
     var timeSince = since(tweet.created_at);
    
     $(".tweets").prepend('<p class="tweet-body">' +
@@ -75,5 +77,10 @@
 
    event.preventDefault();
   });
+
+  $(".user-name").last().click(function(){
+
+
+  })
 
 });
