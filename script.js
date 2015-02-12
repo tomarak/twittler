@@ -1,6 +1,7 @@
  $(document).ready(function(){
 
-  var visitor = "anuj";
+  var visitorN = "anuj";
+  streams.users[visitorN] = [];
 
 
   var since = function(date){
@@ -44,34 +45,35 @@
       '</span>' +
       ': ' + 
       '<span class="message">' + tweet.message + '</span>'+
-      '<span class="time">' + " " +timeSince + '</span>' +
+      '<span class="time">' + "  " +timeSince + '</span>' +
       '</p>');
     index -= 1;
-    scheduleNextTweet();
-  }
-
-  $("form#userInput").submit(function(event){
-    var submitted = $("input.userIn").val();
-    console.log(submitted);
-    writeTweet(submitted);
-
-
-    var tweet = streams.home[index];
-    
    
-    $(".tweets").prepend('<p class="tweet-body">'+
-      '<span class="at">'+'@'+'</span>' + 
+  };
+
+  $("form#visitor").submit(function(event){
+    var submitted = $("input.visitorTweet").val();
+    
+    writeTweet(visitorN, submitted);
+
+
+    var index = streams.home.length - 1;
+    var tweet = streams.home[index];
+    var timeSince = since(tweet.created_at);
+   
+    $(".tweets").prepend('<p class="tweet-body">' +
+      '<span class="at">' + '@' + '</span>' + 
       '<span class="user-name">'+ tweet.user + 
       '</span>' +
       ': ' + 
-      '<span class="message">' + tweet.message + '</span>'+
-      '<span class="time">' + " " +timeSince + '</span>' +
+      '<span class="message">' + tweet.message + '</span>' +
+      '<span class="time">' + "  " +timeSince + '</span>' +
       '</p>');
 
-    $("input.userIn").text("");
+    $("input.visitorTweet").text("");
 
 
-    event.preventDefault();
-  })
+   event.preventDefault();
+  });
 
 });
