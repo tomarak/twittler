@@ -40,14 +40,13 @@
     $(".tweets").prepend('<p class="tweet-body">' +
       '<span class="at">' + '@' + '</span>' + 
       '<span class="user-name">'+ tweet.user + '</span>' +
-      ': ' + 
+      '<span class="time">' + "  " +timeSince + '</span>' + '<br>' + 
       '<span class="message">' + tweet.message + '</span>' +
-      '<span class="time">' + "  " +timeSince + '</span>' +
+      
       '</p>');
   };
 
   //post initial generated tweets
-  
   var index = streams.home.length - 1;
   while(index >= 0){
     var tweet = streams.home[index];
@@ -93,7 +92,7 @@
       var newTime = since(oldTime);
       $(this).text(newTime); 
     });
- */
+   */
  index = streams.home.length - 1;
  tweet = streams.home[index];
  postTweet(tweet);
