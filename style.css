@@ -5,7 +5,7 @@ body {
 
 #header {
 	font-size: 35px;
-	color: #E5E2E3;
+	color: #2B2E2E;
 }
 
 .container {
@@ -13,7 +13,6 @@ body {
 	margin:0px auto;
 	text-align:left;
 	padding:15px;
-
 }
 
 .tweets {
@@ -24,7 +23,6 @@ body {
 	color: #2B2E2E;
 	font-weight: bold;
 	cursor: pointer;
-
 }
 
 .message {
@@ -73,7 +71,7 @@ body {
 	border: 0;
 	background: #6d8ac4;
 	padding: 11px 30px;
-	margin: 10px 10px;
+	margin-top: 10px;
 
 	font-size:14px;
 	color: #fff;
