@@ -39,15 +39,15 @@
   var postTweet = function(tweet) {
     $(".tweets").prepend('<p class="tweet-body">' +
       '<span class="at">' + '@' + '</span>' + 
-      '<span class="user-name">'+ tweet.user + 
-      '</span>' +
+      '<span class="user-name">'+ tweet.user + '</span>' +
       ': ' + 
       '<span class="message">' + tweet.message + '</span>' +
       '<span class="time">' + "  " +timeSince + '</span>' +
       '</p>');
   };
 
-
+  //post initial generated tweets
+  
   var index = streams.home.length - 1;
   while(index >= 0){
     var tweet = streams.home[index];
@@ -57,39 +57,50 @@
 
   };
 
+  //posts user submitted tweets
   $("form#visitor").submit(function(event){
     var submitted = $("input.visitorTweet").val();
-    
     writeTweet(submitted);
+
     index = streams.home.length - 1;
-    var tweet = streams.home[index];
+    tweet = streams.home[index];
+
     tweet.created_at = new Date();
-    var timeSince = since(tweet.created_at);
+    timeSince = since(tweet.created_at);
 
     postTweet(tweet);
-
     $("input.visitorTweet").text("");
-
 
     event.preventDefault();
   });
 
-  $(".user-name").click(function(){
+  //clears tweet list and reads all tweets for user name clicked
+  $(".tweets").on("click", ".user-name", function(){
+    clearTimeout(setTimer);
     var userClicked = $(this).text();
-   $(".tweets").text("");
+    $(".tweets").text("");
 
     streams.users[userClicked].forEach(function(tweet){
       postTweet(tweet);
-    })
-  })
+    });
+  });
 
-  
+  //periodically adds tweets
   var updateTweets = function(){
-    index = streams.home.length - 1;
-    tweet = streams.home[index];
-    postTweet(tweet);
-    setTimeout(updateTweets, 3000);
-  }
-  updateTweets();
+    /*
+    $(".time").each(function(){
+      var oldTime = $(this).text();
+      var newTime = since(oldTime);
+      $(this).text(newTime); 
+    });
+ */
+ index = streams.home.length - 1;
+ tweet = streams.home[index];
+ postTweet(tweet);
+ setTimer = setTimeout(updateTweets, 6000);
+
+
+};
+updateTweets();
 
 });
