@@ -1,15 +1,14 @@
  var visitor = "anuj";
  $(document).ready(function(){
-  streams.users[visitor] = [];
 
+  streams.users[visitor] = [];
 
   var postTweet = function(tweet) {
     $(".tweets").prepend('<p class="tweet-body">' +
       '<span class="at">' + '@' + '</span>' + 
       '<span class="user-name">'+ tweet.user + '</span>' +
-      '<span class="time">' + "  " +tweet.created_at + '</span>' + '<br>' + 
+      '<span class="time">' + "  " + newTime + '</span>' + '<br>' + 
       '<span class="message">' + tweet.message + '</span>' +
-      
       '</p>');
   };
 
@@ -17,7 +16,7 @@
   var index = streams.home.length - 1;
   while(index >= 0){
     var tweet = streams.home[index];
-    tweet.created_at = moment(tweet.created_at).fromNow();
+    var newTime = moment(tweet.created_at).fromNow();
     postTweet(tweet);
     index -= 1;
 
@@ -30,11 +29,8 @@
     index = streams.home.length - 1;
     tweet = streams.home[index];
 
-
-    tweet.created_at = moment(tweet.created_at);
-
+    newTime = moment(tweet.created_at).fromNow();
     postTweet(tweet);
-
 
     $("input.visitorTweet").val("");
     event.preventDefault();
@@ -45,7 +41,7 @@
     clearTimeout(setTimer);
     var userClicked = $(this).text();
     $(".tweets").text("");
-
+    newTime = moment(tweet.created_at).fromNow();
     streams.users[userClicked].forEach(function(tweet){
       postTweet(tweet);
     });
@@ -54,15 +50,28 @@
   //periodically adds tweets
   var updateTweets = function(){
 
- index = streams.home.length - 1;
- tweet = streams.home[index];
- tweet.created_at = moment(tweet.created_at).fromNow()
- postTweet(tweet);
- setTimer = setTimeout(updateTweets, 6000);
-
+   index = streams.home.length - 1;
+   tweet = streams.home[index];
+   var newTime = moment(tweet.created_at).fromNow();
+   postTweet(tweet);
+   setTimer = setTimeout(updateTweets, 6000);
 
  };
 
-updateTweets();
+
+ updateTweets();
+
+//refreshes pages if header clicked, also refreshes timestamps
+$("#header").on("click", function(){
+  $(".tweets").text("");
+  var index = streams.home.length - 1;
+  while(index >= 0){
+    var tweet = streams.home[index];
+    newTime = moment(tweet.created_at).fromNow();
+    postTweet(tweet);
+    index -= 1;
+
+  };
+})
 
 });
