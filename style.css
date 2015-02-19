@@ -1,18 +1,19 @@
 body {
 	background-color: rgba(0,0,0,.2);
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: RobotoDraft, 'Helvetica Neue', Helvetica, Arial;;
 }
 
 #header {
 	font-size: 35px;
 	color: #2B2E2E;
+	cursor: pointer;
 }
 
 .container {
 	width:500px;
-	margin:0px auto;
+	margin: auto;
 	text-align:left;
-	padding:15px;
+	
 }
 
 .tweets {
@@ -41,10 +42,12 @@ body {
 .tweet-body {
 	background: #fff;
 	border-top: 5px solid #5f82be;
+	border-bottom: 2px solid #c6c7cc
 	border-radius: 2px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: 5px;
+	padding-left: 15px;
+	width: 100%;
 
 	-webkit-animation: fadein 2s;
 }
@@ -61,8 +64,11 @@ body {
 .visitorTweet{
 	background: #fff;
   border: 1px solid #c6c7cc;
+  border-bottom: 2px solid #c6c7cc;
   color: #636466;
-  padding: 6px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
   margin-top: 6px;
   width: 100%;
 }
@@ -75,4 +81,6 @@ body {
 
 	font-size:14px;
 	color: #fff;
+
+	cursor: pointer;
 }
