@@ -41,8 +41,9 @@
     clearTimeout(setTimer);
     var userClicked = $(this).text();
     $(".tweets").text("");
-    newTime = moment(tweet.created_at).fromNow();
+    
     streams.users[userClicked].forEach(function(tweet){
+      newTime = moment(tweet.created_at).fromNow();
       postTweet(tweet);
     });
   });
@@ -64,14 +65,11 @@
 //refreshes pages if header clicked, also refreshes timestamps
 $("#header").on("click", function(){
   $(".tweets").text("");
-  var index = streams.home.length - 1;
-  while(index >= 0){
-    var tweet = streams.home[index];
-    newTime = moment(tweet.created_at).fromNow();
-    postTweet(tweet);
-    index -= 1;
 
-  };
+streams.home.forEach(function(tweet){
+  newTime = moment(tweet.created_at).fromNow();
+      postTweet(tweet);
+  });
 })
 
 });
